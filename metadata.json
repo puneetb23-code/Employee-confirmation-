@@ -1,0 +1,5 @@
+{
+  "name": "Employee Confirmation Portal",
+  "description": "A web portal for managing the employee confirmation process. It facilitates reviews by Reporting Managers, Department Heads, and HR Heads in a streamlined workflow.",
+  "requestFramePermissions": []
+}
