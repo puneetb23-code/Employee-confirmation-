@@ -136,11 +136,12 @@ const ConfirmationForm: React.FC<ConfirmationFormProps> = ({ employee, role, onC
                 <div className="p-5 border-b border-slate-200 flex justify-between items-center flex-shrink-0">
                     <h2 className="text-xl font-bold text-slate-800">Confirmation Details</h2>
                     <button onClick={onClose} className="text-slate-500 hover:text-slate-800">
+                        {/* FIX: Corrected SVG attribute casing from strokeLineCap/strokeLineJoin to strokeLinecap/strokeLinejoin for React compatibility. */}
                         <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12"></path></svg>
                     </button>
                 </div>
                 
-                <div className="overflow-y-auto p-5 flex-grow min-h-0">
+                <div className="overflow-y-auto p-5">
                     <form id="confirmation-form" onSubmit={handleFormSubmit}>
                         <Section title="Employee Information">
                             <dl className="space-y-1">
@@ -162,19 +163,19 @@ const ConfirmationForm: React.FC<ConfirmationFormProps> = ({ employee, role, onC
                         {role === UserRole.ReportingManager && employee.status === ConfirmationStatus.PendingReportingManager && renderReportingManagerForm()}
                         {role === UserRole.DeptHead && employee.status === ConfirmationStatus.PendingDeptHead && renderDeptHeadForm()}
                         {role === UserRole.HRHead && employee.status === ConfirmationStatus.PendingHRHead && renderHRHeadForm()}
+
+                        {isActionable && (
+                            <div className="pt-5 mt-5 border-t border-slate-200 flex justify-end space-x-3">
+                                <button type="button" onClick={onClose} className="px-4 py-2 text-sm font-medium text-slate-700 bg-slate-100 border border-transparent rounded-md hover:bg-slate-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-slate-500">
+                                    Cancel
+                                </button>
+                                <button type="submit" className="px-4 py-2 text-sm font-medium text-white bg-sky-600 border border-transparent rounded-md shadow-sm hover:bg-sky-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-sky-500">
+                                    Submit Review
+                                </button>
+                            </div>
+                        )}
                     </form>
                 </div>
-                
-                {isActionable && (
-                    <div className="p-5 border-t border-slate-200 flex justify-end space-x-3 flex-shrink-0">
-                        <button type="button" onClick={onClose} className="px-4 py-2 text-sm font-medium text-slate-700 bg-slate-100 border border-transparent rounded-md hover:bg-slate-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-slate-500">
-                            Cancel
-                        </button>
-                        <button type="submit" form="confirmation-form" className="px-4 py-2 text-sm font-medium text-white bg-sky-600 border border-transparent rounded-md shadow-sm hover:bg-sky-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-sky-500">
-                            Submit Review
-                        </button>
-                    </div>
-                )}
             </div>
         </div>
     );
